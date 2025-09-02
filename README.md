@@ -72,11 +72,11 @@ Doctors and healthcare professionals can use such predictive models to **support
 ## 📂 Project Structure
 
 ```
-├── data/              # Dataset (if included or linked)  
-├── notebooks/         # Jupyter Notebooks (EDA + model training)  
-├── heart_disease.py   # Main Python script  
-├── requirements.txt   # Dependencies  
-└── README.md          # Project documentation  
+├── datasets/              
+├── main.ipynb          
+├── requirements.txt
+├── .gitignore  
+└── README.md         
 ```
 
 ---
