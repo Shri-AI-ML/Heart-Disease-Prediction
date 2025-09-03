@@ -1,0 +1,6 @@
+# for folders to ignore
+figures/
+venv/
+
+# For files to ignore
+Research.ipynb
