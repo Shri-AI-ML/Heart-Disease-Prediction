@@ -1,6 +1,11 @@
 # for folders to ignore
 figures/
 venv/
+Research_paper/
 
 # For files to ignore
 Research.ipynb
+app.py
+hi.py
+
+heart_disease_model.joblib
