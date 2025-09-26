@@ -5,7 +5,8 @@ Research_paper/
 
 # For files to ignore
 Research.ipynb
-app.py
-dashboard.py
+
+
+Project_report.docx
 
 heart_disease_model.joblib
