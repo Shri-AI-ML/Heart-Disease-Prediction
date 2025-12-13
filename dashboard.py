@@ -26,10 +26,10 @@ st.set_page_config(
 def load_model():
     """Load the machine learning model from a file."""
     try:
-        model = joblib.load('heart_disease_model.joblib')
+        model = joblib.load('Hybrid_heart_disease_model.joblib')
         return model
     except FileNotFoundError:
-        st.error("Error: The model file 'heart_disease_model.joblib' was not found. Please make sure it is in the same directory.")
+        st.error("Error: The model file 'Hybrid_heart_disease_model.joblib' was not found. Please make sure it is in the same directory.")
         return None
 
 model = load_model()
