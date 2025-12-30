@@ -5,9 +5,8 @@ Research_paper/
 
 
 # For files to ignore
-Research.ipynb
-xgboost_heart_disease_model.joblib
 preprocessing.ipynb
 Project_report.docx
 Project_report_Group-44.docx
-heart_disease_model.joblib
+Hybrid_heart_disease_model.joblib
+scaler.joblib
