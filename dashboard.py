@@ -3,12 +3,12 @@ import joblib
 import pandas as pd
 import numpy as np
 
-# --- 1. Load Model and Scaler ---
+# 1. Load Model and Scaler ---
 model = joblib.load('Hybrid_heart_disease_model.joblib')
 scaler = joblib.load('scaler.joblib')
 
-# --- 2. Exact 8 Features Used During Fitting ---
-# Inka order wahi rakha hai jo aapne bataya (minus the target)
+# 2. Exact 8 Features Used During Fitting ---
+
 features = [
     'Age', 'Sex', 'ChestPainType', 'Cholesterol', 
     'NumMajorVessels', 'Thalassemia', 'ST_Slope', 'ExerciseAngina'
@@ -17,7 +17,7 @@ features = [
 st.set_page_config(page_title="Heart Disease AI", page_icon="❤️")
 st.title("❤️ Heart Disease Prediction Dashboard")
 
-# --- 3. User Inputs ---
+# 3. User Inputs 
 col1, col2 = st.columns(2)
 
 with col1:
@@ -32,7 +32,7 @@ with col2:
     slope = st.selectbox("ST Slope (0-2)", [0, 1, 2])
     exang = st.selectbox("Exercise Induced Angina (1=Yes, 0=No)", [1, 0])
 
-# --- 4. Prediction Logic ---
+# 4. Prediction Logic 
 if st.button("Predict Results"):
     # Creating DataFrame with the exact names and order
     input_df = pd.DataFrame([[age, sex, cp, chol, vessels, thal, slope, exang]], 
