@@ -3,11 +3,11 @@ import joblib
 import pandas as pd
 import numpy as np
 
-# 1. Load Model and Scaler ---
+# 1. Load Model and Scaler 
 model = joblib.load('Hybrid_heart_disease_model.joblib')
 scaler = joblib.load('scaler.joblib')
 
-# 2. Exact 8 Features Used During Fitting ---
+# 2. Exact 8 Features Used During Fitting 
 
 features = [
     'Age', 'Sex', 'ChestPainType', 'Cholesterol', 
