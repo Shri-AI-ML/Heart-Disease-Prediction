@@ -1,4 +1,4 @@
-# 🫀 Heart Disease Prediction using Hybrid Stacking Ensemble
+# 🧠 Reliability-Centric Evaluation of Stacking Ensembles for Cardiovascular Risk Prediction
 
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
 ![ML](https://img.shields.io/badge/Model-Hybrid%20Stacking-purple)
