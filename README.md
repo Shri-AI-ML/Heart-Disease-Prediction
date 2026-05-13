@@ -1,89 +1,90 @@
-# 🫀 Heart Disease Prediction using Hybrid Stacking Ensemble
+# 🫀 Advanced Heart Disease Prediction & Research Pipeline
 
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
-![ML](https://img.shields.io/badge/Model-Hybrid%20Stacking-purple)
-![Status](https://img.shields.io/badge/Status-Completed-green)
+![ML](https://img.shields.io/badge/Model-Ensembles%20%26%20Stacking-purple)
+![Research](https://img.shields.io/badge/Focus-Robustness%20%26%20Calibration-orange)
 
 ## 📌 Overview
 
-This project implements a robust **Hybrid Machine Learning Model** to predict the presence of heart disease. Instead of relying on a single algorithm, we used a **Stacking Ensemble** technique that combines multiple powerful classifiers (Random Forest, Logistic Regression, XGBoost) to achieve higher accuracy and better generalization on unseen data.
+This project has evolved from a foundational Hybrid Stacking Ensemble into a comprehensive **Machine Learning Research Pipeline** focused on predicting heart disease. The repository now encompasses deep investigations into feature weighting, model calibration, robustness against data noise, and statistical validation of ensemble methods.
 
-The model is designed to minimize false negatives, ensuring that critical cases of heart disease are detected effectively.
-
----
-
-## ⚙️ Model Architecture
-
-We used a **Stacking Classifier** approach:
-
-1.  **Base Learners (Level 0):**
-    * **Random Forest:** Captures complex, non-linear patterns.
-    * **XGBoost:** Handles gradient boosting for high performance.
-    2.  **Meta Learner (Level 1):**
-    * **Logistic Regression:** Takes the predictions from base learners and makes the final decision.
+Our main goal is to not only achieve high accuracy but to ensure **clinical reliability**, producing well-calibrated probabilities and robust predictions even when patient data is noisy.
 
 ---
 
-## 📈 Performance Results
+## 🔬 Key Research Areas
 
-The Hybrid Stacking Model demonstrated superior performance in distinguishing between patients with and without heart disease.
+### 1. Entropy-Weighted Feature Ensembles
+*File: `entropy_weighted_et_pipeline.py`*
+* **Concept:** Computed per-feature entropy to dynamically weight features based on their information content before feeding them into an Extra Trees classifier.
+* **Outcome:** Actively mitigates the effect of noisy or low-information variables. Evaluated against a baseline Extra Trees model using Brier Scores, AUC, and paired t-tests.
 
-### 🏆 Key Metrics
-* **Best Test Accuracy:** 89.13%
-* **Best AUC Score:** 0.9429
+### 2. Statistical Stacking & Validation
+*Files: `statistical_significance_test.py`, `research_validation_pipeline.py`*
+* **Concept:** Extensive Stratified 5-Fold Cross-Validation across a diverse set of models (Extra Trees, Random Forest, XGBoost, Naive Bayes, SVM, KNN).
+* **Investigation:** Automated evaluation of all possible 2-model stacking combinations using Logistic Regression as the Meta-Learner.
+* **Validation:** Rigorous statistical hypothesis testing (paired t-tests) to confirm whether ensemble setups (e.g., ET + NB) provide a significant improvement over single baseline models.
 
-### 📝 Detailed Classification Report
-*(Based on Stacking Ensemble Evaluation)*
+### 3. Model Calibration & Reliability
+*File: `calibration_research_pipeline.py`*
+* **Concept:** High accuracy means little if a model's predicted probability of 80% doesn't roughly map to 80% true positive rate in reality.
+* **Investigation:** Benchmarked the calibration curves and Brier scores between individual base models (like ET) and stacked models (ET + NB).
+* **Outcome:** Verified that the stacking approach improves true probability mapping, making it more reliable for clinical decision-support systems.
 
-| Class                | Precision | Recall   | F1-Score | Support |
-| :---                 | :---:     | :---:    | :---:    | :---:   |
-| **0 (No Disease)**   | 0.83      |   0.79   |  0.81    |   24    |
-| **1 (Disease)**      | **0.77**  | **0.81** | **0.79** |    21   |
-| **Overall Accuracy** | | | **0.80** | 45 |
+### 4. Robustness Under Gaussian Noise
+*File: `robustness_noise_analysis.py`*
+* **Concept:** Medical data is rarely perfect. Missing sensor readings, human error, or differing hospital standardizations create "noisy" datasets.
+* **Investigation:** Simulated real-world imperfections by injecting varying levels of Gaussian noise (from 0.0 to 0.2 variance) into the testing data.
+* **Outcome:** Analyzed the degradation curve of stacked models vs standalone models, proving the added resilience gained through combining orthogonal models (like Extra Trees + Naive Bayes).
 
-> **Interpretation:**
-> * **AUC of ~0.94** indicates the model has excellent capability to distinguish between classes.
-> * **Recall of 0.81 for Class 1** shows the model is effective at identifying positive heart disease cases.
+---
+
+## ⚙️ Core Architectures Researched
+
+### Early Architecture
+- **Base Learners (Level 0):** Random Forest and XGBoost.
+- **Meta Learner (Level 1):** Logistic Regression.
+
+### Progressive Research Architectures
+- **Base Learners (Level 0):** Extra Trees (ET) and Naive Bayes (NB). This pairing proved highly effective because ET handles complex non-linear splits while NB handles probabilistic conditional independence, making them exceptionally orthogonal.
+- **Meta Learner (Level 1):** Logistic Regression to output the final, smooth probability map.
 
 ---
 
 ## 📊 Dataset & Preprocessing
 
-* **Dataset:** Contains medical details like Age, Sex, CP (Chest Pain), Chol (Cholesterol), Thal, etc.
-* **Preprocessing Steps:**
-    * Handling missing values.
-    * **Scaling:** Applied Standard Scaling to normalize features.
-    * **Encoding:** Converted categorical variables for ML compatibility.
-    * **Splitting:** Data divided into Training and Testing sets to prevent data leakage.
-
----
-
-## 🛠️ Tech Stack
-
-* **Programming Language:** Python 🐍
-* **Libraries:**
-    * `scikit-learn` (for Stacking, RF, Logistic Regression)
-    * `xgboost` (for Gradient Boosting)
-    * `pandas` & `numpy` (for Data Manipulation)
-    * `matplotlib` & `seaborn` (for Visualization)
+* **Dataset:** Contains standard cardiovascular clinical measures, including Age, Sex, Chest Pain Type, Cholesterol, Fasting Blood Sugar, Max HR, etc.
+* **Preprocessing Pipeline:**
+  * Scaling via `StandardScaler` to normalize feature variance.
+  * Entropy Computation for feature importance scaling.
+  * Cross-Validation splitting (Stratified 5-Fold) to prevent data leakage and guarantee valid statistical conclusions.
 
 ---
 
 ## 📂 Project Structure
 
 ```bash
-├── data/               # Dataset files
-├── heart_disease_prediction.ipynb  # Main source code
-├── requirements.txt    # Dependencies
-└── README.md           # Project Documentation
+├── datasets/                              # Clinical heart disease data
+├── entropy_weighted_et_pipeline.py        # Entropy scaling & ET research
+├── calibration_research_pipeline.py       # Reliability diagrams & Brier scoring
+├── robustness_noise_analysis.py           # Noise injection capability tests
+├── statistical_significance_test.py       # Base model CV & pairwise stacking grid-search
+├── research_validation_pipeline.py        # Paired t-tests for stacking vs baseline
+├── dashboard.py                           # Frontend UI/Dashboard for interaction
+├── HUC-EGML.ipynb                         # Additional experimental notebook
+├── main.ipynb                             # Core modeling & EDA
+├── universal_heart_research_pipeline.ipynb# End-to-end exploratory pipeline
+├── requirements.txt                       # Project dependencies
+└── README.md                              # This documentation
+```
 
 ---
 
 ## 🛠️ Tech Stack
 
-* **Language:** Python 🐍
-* **Libraries:** `pandas`, `numpy`, `scikit-learn`, `xgboost`, `matplotlib`, `seaborn`
-* **Tools:** Jupyter Notebook / Google Colab
+* **Programming Language:** Python 🐍
+* **Machine Learning:** `scikit-learn`, `xgboost`, `scipy` (for statistical testing)
+* **Data Manipulation & Viz:** `pandas`, `numpy`, `matplotlib`, `seaborn`
 
 ---
 
@@ -91,42 +92,28 @@ The Hybrid Stacking Model demonstrated superior performance in distinguishing be
 
 1. **Clone the repository**
    ```bash
-   git clone [https://github.com/your-username/heart-disease-prediction.git](https://github.com/your-username/heart-disease-prediction.git)
+   git clone https://github.com/Shri-AI-ML/heart-disease-prediction.git
+   cd heart-disease-prediction
+   ```
 
+2. **Verify Dependencies**
+   It's recommended to use a virtual environment:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+   pip install -r requirements.txt
+   ```
 
-## 🚀 Real-world Use Case
-
-This project demonstrates how ML can assist in **early detection of heart disease**.
-Doctors and healthcare professionals can use such predictive models to **support diagnosis, reduce risks, and improve patient outcomes**.
-
----
-
-## 🛠️ Tech Stack
-
-* **Python** 🐍
-* Libraries: `pandas`, `numpy`, `matplotlib`, `seaborn`, `scikit-learn`, `xgboost`
-
----
-
-## 📂 Project Structure
-
-```
-├── datasets/              
-├── main.ipynb
-├── dashboard.py       
-├── requirements.txt
-├── .gitignore  
-└── README.md         
-```
-
----
-
+3. **Run the Research Pipelines**
+   Execute any of the individual research scripts to replicate the findings:
+   ```bash
+   python robustness_noise_analysis.py
+   python statistical_significance_test.py
+   ```
 
 ---
 
 ## 🙌 Acknowledgements
 
-* Dataset inspired by UCI Heart Disease dataset
-* Built as part of my **AI/ML learning journey** 🌟
-
-
+* Dataset inspired by the UCI Heart Disease dataset.
+* This is an ongoing project designed to bridge the gap between simple benchmark accuracy and robust, clinically reliable machine learning.
